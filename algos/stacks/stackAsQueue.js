@@ -14,7 +14,7 @@ class Stack
     // dequeue() 
     removeFromStack() {
         if(this.isEmpty()){
-            return 0;
+            throw Error('no items in stack');
         }
         return this.items.pop();
     }
@@ -52,9 +52,8 @@ class Stack
             console.log(stack2)
         }
     
-        return stack2.items.pop();
+        return stack2.items.pop();        
     }
-
 } 
 
 // function stackAsQueue(){
@@ -83,7 +82,7 @@ var stack2 = new Stack();
 stack1.addToStack('a');
 stack1.addToStack('b');
 stack1.addToStack('c');
-// stack2.addToStack('1');
+stack2.addToStack('1');
 // stack2.addToStack('2');
 // stack2.addToStack('3');
 // console.log(stack1.printStack());

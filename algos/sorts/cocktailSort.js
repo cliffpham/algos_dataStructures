@@ -1,12 +1,15 @@
 function cocktailSort(arr){
     rightSwapIndex = 0;
+    leftSwapIndex = 0;
     rightCounter = 1;
     leftCounter = 1;
     reset = 1;
-    start = 0;
+   
 
+
+    // 0 & 1 in left/rightCounter act as a flag 
     while(rightCounter !== 0 || leftCounter !== 0){
-        for(let i = start; i < arr.length; i++) {
+        for(let i = leftSwapIndex; i < arr.length; i++) {
             // console.log(i);
             if(arr[i] > arr[i+1]){
                 // console.log('front swap: ' + arr[i] + ' | ' + arr[i+1]);
@@ -46,7 +49,7 @@ function cocktailSort(arr){
             leftCounter = 0;
         }
 
-        start++;
+        leftSwapIndex++;
         rightSwapIndex = 0;
     }
 
@@ -68,7 +71,7 @@ console.log(cocktailSort([ 29, 316, 309, 370, 242, 8, 406, 114, 73, 158, 158 ]))
 // console.log('////////////////////////////////////////////////')
 console.log(cocktailSort(createRandomArray(450, 12)));
 console.log(cocktailSort(createRandomArray(450, 12)));
-console.log(cocktailSort(createRandomArray(450, 12)));
+console.log(cocktailSort(createRandomArray(-10, 12)));
 
 
 
