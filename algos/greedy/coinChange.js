@@ -15,5 +15,6 @@ function coinChange (coins, target, i = 0, results = []){
     return results;
 }
 
-console.log(coinChange([10,5,1], 48));
+console.log(coinChange([15,10,5,1,30], 48));
+console.log(coinChange([1,3,6,12,24], 48));
 console.log(coinChange([200,10,1,100,50], 526));

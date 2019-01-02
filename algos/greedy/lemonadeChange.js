@@ -9,7 +9,6 @@ function lemonadeChange(bills){
 
         while(register.length >= 1){
             amount -= register[register.length - 1]
-            // console.log(amount);
             register.pop();
 
             if(amount === 15 && register[0] == 10){
@@ -45,13 +44,12 @@ function lemonadeChange(bills){
     return true;
 }
 
-console.log(lemonadeChange([5,5,5,10]));
-console.log(lemonadeChange([5,5,5,10,5,20,5,10,5,20]));
-console.log(lemonadeChange([5,5,5,10,20]));
-console.log(lemonadeChange([5,5,10,20]));
-
-console.log(lemonadeChange([5,5,10,10,20]));
-console.log(lemonadeChange([10,10]));
-console.log(lemonadeChange([5,20]));
+// console.log(lemonadeChange([5,5,5,10]));
+// console.log(lemonadeChange([5,5,5,10,5,20,5,10,5,20]));
+// console.log(lemonadeChange([5,5,5,10,20]));
+// console.log(lemonadeChange([5,5,10,20]));
+// console.log(lemonadeChange([5,5,10,10,20]));
+// console.log(lemonadeChange([10,10]));
+// console.log(lemonadeChange([5,20]));
 
 
