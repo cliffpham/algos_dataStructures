@@ -39,20 +39,28 @@ class Stack
             while(stack1.items.length > 0){
                 stack2.items.push(stack1.items.pop());
             }
-        } else {
-            while(stack2.items.length > 0){
-                stack1.items.push(stack2.items.pop());
-            }
 
-            console.log(stack1)
+        // } else {
+        //     while(stack2.items.length > 0){
+        //         stack1.items.push(stack2.items.pop());
+        //     }
 
-            while(stack1.items.length > 0){
-                stack2.items.push(stack1.items.pop());
-            }
-            console.log(stack2)
-        }
+        //     console.log(stack1)
+
+        //     while(stack1.items.length > 0){
+        //         stack2.items.push(stack1.items.pop());
+        //     }
+        //     console.log(stack2)
+        // }
     
-        return stack2.items.pop();        
+         return stack2.items.pop();     
+    }
+
+    if(stack1.isEmpty()){
+        while(stack2.items.length > 0){
+            stack1.items.push(stack2.items.pop());
+        }
+        return stack1.items.pop();
     }
 } 
 
@@ -75,15 +83,17 @@ class Stack
 //     }
 
 //     return stack2;
-// }
+}
 
-var stack1 = new Stack();
-var stack2 = new Stack();
-stack1.addToStack('a');
-stack1.addToStack('b');
-stack1.addToStack('c');
-stack2.addToStack('1');
+//test case
+
+// var stack1 = new Stack();
+// var stack2 = new Stack();
+// stack1.addToStack('a');
+// stack1.addToStack('b');
+// stack1.addToStack('c'); 
+// stack2.addToStack('1');
 // stack2.addToStack('2');
 // stack2.addToStack('3');
 // console.log(stack1.printStack());
-console.log(stack1.stackAsQueue(stack1, stack2));
+// console.log(stack1.stackAsQueue(stack1, stack2));
