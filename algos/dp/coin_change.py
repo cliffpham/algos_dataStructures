@@ -1,13 +1,13 @@
 def all_change(amount, coins):
 
     def recur(amount, coins, i, cache):
-        ck = str(amount) + "," + str(i)
+        ck = "%s:%s"(amount, i)
+
+        if ck in cache:
+            return cache[ck]
 
         if amount < 0:
             return 0
-            
-        if ck in cache:
-            return cache[ck]
 
         if amount == 0:
             return 1
