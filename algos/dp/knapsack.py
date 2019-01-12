@@ -1,12 +1,18 @@
-def brute_knapsack(w,v,c,i):
+def brute_knapsack(w,v,c,i, cache):
+    ck = "%s:%s" % (c, i)
+
+    if ck in cache:
+        return cache[ck]
+
     if  i >= len(w):
         return 0
 
     l = 0
     r = 0
     if c >= w[i]:
-        r = brute_knapsack(w,v,c-w[i], i) + v[i]
-    l = brute_knapsack(w,v,c, i+1)
+        r = brute_knapsack(w,v,c-w[i], i, cache) + v[i]
+    l = brute_knapsack(w,v,c, i+1, cache)
+    cache[ck] = max(l,r)
 
     return max(l,r)
 
@@ -18,8 +24,8 @@ w2 = [4,3,6,2]
 v2 = [70,50,80,30]
 c2 = 6
 
-print(brute_knapsack(w,v,c, i = 0))
-print(brute_knapsack(w2,v2,c2, i = 0))
+print(brute_knapsack(w,v,c, i = 0, cache={})) #80
+print(brute_knapsack(w2,v2,c2, i = 0, cache={})) #100
 
 # def knapsack(w,v,c):
 #     def m(r):
