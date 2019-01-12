@@ -1,7 +1,7 @@
 def all_change(amount, coins):
 
     def recur(amount, coins, i, cache):
-        ck = "%s:%s"(amount, i)
+        ck = "%s:%s" % (amount, i)
 
         if ck in cache:
             return cache[ck]
