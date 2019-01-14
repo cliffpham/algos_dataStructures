@@ -46,9 +46,7 @@ def min_dist(s1,s2):
 
     return recur(s1,s2,i,j,{})
 
-print(min_dist("print","flint"))
-print(min_dist("","a"))
-print(min_dist("",""))
+
 
 
 
