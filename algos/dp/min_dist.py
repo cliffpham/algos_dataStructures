@@ -9,6 +9,8 @@ def min_dist(s1,s2):
     >>> min_dist("","")
     0
 
+    >>> min_dist('a','ab')
+    1
     """
 
     i = 0
@@ -46,26 +48,3 @@ def min_dist(s1,s2):
 
     return recur(s1,s2,i,j,{})
 
-
-
-
-
-
-
-# print(min_dist('intention', 'execution'))
-
-# def	edDistRecursive(x,y):
-#     if len(x) == 0:
-#         return len(y)
-    
-#     if len(y) == 0:
-#         return len(x)
-    
-#     k = 1 if x[-1] != y[-1] else 0
-#     a = edDistRecursive(x[:-1], y[:-1]) + k
-#     b = edDistRecursive(x[:-1], y) + 1
-#     c = edDistRecursive(x,y[:-1]) + 1
-
-#     return min(a,b,c)
-
-# print(edDistRecursive('intention', 'execution'))

@@ -1,15 +1,27 @@
 import math
 
 def min_coin(coins, target):
+
+    """
+    >>> min_coin([1,3,5], 11)
+    3
+
+    >>> min_coin([5,3], 4)
+    -1
+
+    >>> min_coin([1,2,4], 5)
+    2
+    """
     
-    result = recur(coins, target, cache = {}) 
+    result = recur(coins, target, 0, cache = {}) 
     
     if result == float('inf'):
         return -1
 
     return result
 
-def recur(coins, target, cache):
+def recur(coins, target, i, cache):
+    ck = "%s:%s" % (target, i)
 
     if target in cache:
         return cache[target]
@@ -19,14 +31,14 @@ def recur(coins, target, cache):
 
     if target == 0:
         return 0
-
-    best = float('inf')
-    for c in coins:
-        best = min(best, recur(coins, target - c, cache) + 1)
-        cache[target] = best
     
-    return cache[target]
+    if i >= len(coins):
+        return float('inf')
 
-print(min_coin([1,3,4],4))
-print(min_coin([2,4],3))
-print(min_coin([1,2,5],11))
+    l = recur(coins, target, i+1, cache)
+    r = recur(coins, target - coins[i], i, cache) + 1
+    
+    cache[ck] = min(l,r)
+    
+    return min(l,r)
+
