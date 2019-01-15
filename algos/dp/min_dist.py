@@ -43,7 +43,7 @@ def min_dist(s1,s2):
         k = 1 if s1[i-1] != s2[j-1] else 0
         c = recur(s1,s2,i-1,j-1, cache) + k
         cache[ck] = min(a,b,c)
-        print(cache)
+      
         return min(a,b,c)
 
     return recur(s1,s2,i,j,{})

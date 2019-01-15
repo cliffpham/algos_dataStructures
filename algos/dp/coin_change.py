@@ -1,6 +1,14 @@
-def all_change(amount, coins):
+def all_change(coins, amount):
+    """
+    >>> all_change([1,3,4], 5)
+    3
 
-    def recur(amount, coins, i, cache):
+    >>> all_change([10,25], 11)
+    0
+    
+    """
+
+    def recur(coins, amount, i, cache):
         ck = "%s:%s" % (amount, i)
 
         if ck in cache:
@@ -15,14 +23,12 @@ def all_change(amount, coins):
         if i >= len(coins):
             return 0
 
-        l = recur(amount, coins, i+1, cache)
-        r = recur(amount - coins[i], coins,i, cache)
+        l = recur(coins, amount, i+1, cache)
+        r = recur(coins, amount - coins[i],i, cache)
         
         cache[ck] = l+r
 
         return l+r
 
-    return recur(amount, coins, i=0, cache={})
+    return recur(coins, amount, i=0, cache={})
 
-print(all_change(500, [3,5,7,8,9,10,11]))
-print(all_change(5, [1,3,4]))

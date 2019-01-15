@@ -1,5 +1,12 @@
 def integer_break(c):
-    
+    """
+    >>> integer_break(10)
+    36
+
+    >>> integer_break(2)
+    1
+
+    """
     v = []
     for i in range(1,c):
         v.append(i)
@@ -26,7 +33,3 @@ def integer_break(c):
         return max(l,r)
 
     return recur(v, c, i = 0, cache={})
-
-# print(integer_break(10))
-# print(integer_break(2))
-# print(integer_break(58))
