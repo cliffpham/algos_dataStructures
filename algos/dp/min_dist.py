@@ -11,20 +11,23 @@ def min_dist(s1,s2):
 
     >>> min_dist('a','ab')
     1
+
+    >>> min_dist ('', 'a')
+    1
     """
 
     i = 0
     j = 0
     
-    if len(s1) <= 1:
-        i = len(s1)
-    else:
-        i = len(s1) - 1
+    # if len(s1) <= 1:
+    #     i = len(s1)
+    # else:
+    i = len(s1) - 1
 
-    if len(s2) <= 1:
-        j = len(s2)
-    else:
-        j = len(s2) - 1
+    # if len(s2) <= 1:
+    #     j = len(s2)
+    # else:
+    j = len(s2) - 1
 
     def recur(s1,s2,i,j, cache):
         ck = "%s:%s" % (i,j)
@@ -32,7 +35,7 @@ def min_dist(s1,s2):
         if ck in cache:
             return cache[ck]
 
-        if i == 0 or j == 0:
+        if i == -1 or j == -1:
             # print("this is i: %s: this is j: %s" % (i,j))
             return max(i,j)
         
@@ -40,7 +43,7 @@ def min_dist(s1,s2):
         
         b = recur(s1,s2,i,j-1, cache) + 1
         
-        k = 1 if s1[i-1] != s2[j-1] else 0
+        k = 1 if s1[i] != s2[j] else 0
         c = recur(s1,s2,i-1,j-1, cache) + k
         cache[ck] = min(a,b,c)
       
