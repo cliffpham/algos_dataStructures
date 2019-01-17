@@ -6,14 +6,10 @@ def n_queens(n):
 
     result = main(board, [], 0, 0, None)
     count = 0
-    count = max(count, count_queens(result))
-    # print(count)
-
+   
     return print_board(result)
 
 def main(b, queue, i, j, last_space):
-    print('this is the last selected spot: ', end='')
-    print(last_space)
 
     if i >= len(b):
         return b
@@ -25,24 +21,24 @@ def main(b, queue, i, j, last_space):
         open_space = search_board[j]
         
     if place_piece(b, open_space):
-        main(b, queue, i+1, j, open_space)
-    
-    print(last_space)
+        main(b, queue, i, j, open_space)
+  
+
     if last_space != None:
         unplace_piece(b, last_space)
-    #unplace_
-    # print(last_space)
-    # unplace_piece(b, last_space)
-    # open_space = search_board[j+1]
-    # place_piece(b, open_space)
+        search_board = search(b, queue)
+        print(search_board)
+        place_piece(b, search_board[j])
 
     return b
 
 def search(b, queue):
+    print('hello from search')
+    print_board(b)
     queue = []
     for row in range(len(b)):
         for spot in range(len(b)):
-            if b[row][spot] == 1 or b[row][spot] == 'Q':
+            if b[row][spot] == 1 or b[row][spot] == 'Q' or check_adjacency(b, row, spot):
                 continue
             queue.append((row, spot))
 
@@ -67,12 +63,13 @@ def place_piece(b, p):
         mark_column(b, y)
         mark_diagonals(b,x,y)
         b[x][y] = 'Q'
+        print('Hello from place_piece')
+        print_board(b)
         return True
 
 #count all queens on current board
 def count_queens(b):
     count = 0
-
     for row in b:
         for spot in row:
             if spot == 'Q':
@@ -85,6 +82,32 @@ def print_board(b):
         for spot in row:
             print(spot, end = " ")
         print()
+
+def check_adjacency(b, x, y):
+    adj_list = []
+
+    up = x-1
+    down = x+1
+    left = y-1
+    right = y+1
+
+    if up >= 0 and left >= 0:
+        if b[x-1][y-1] == 'Q' or b[x-1][y] == 'Q'or b[x][y-1] == 'Q':
+            adj_list.append(True)
+   
+    if down < len(b) and right < len(b):
+        if b[x][y+1] == 'Q' or b[x+1][y+1] == 'Q'  or b[x+1][y] == 'Q':
+            adj_list.append(True)
+
+    if up >= 0 and right < len(b):
+        if b[x-1][y+1] == 'Q':
+            adj_list.append(True)
+    
+    if down < len(b) and left >= 0:
+        if b[x+1][y-1] == 'Q':
+            adj_list.append(True) 
+   
+    return True in adj_list
 
 #mark rows
 def mark_row(b, x):
@@ -131,24 +154,32 @@ def mark_diagonals(b,x,y):
             b[sw_x][sw_y] = 1
 
 def unplace_piece(b, p):
+    if p == 0:
+        return b
+    
     x = p[0]
     y = p[1]
 
     unmark_row(b, x)
     unmark_column(b, y)
-    # unmark_diagonals(b,x,y)
+    unmark_diagonals(b, x, y)
+
+    print('hello from unplace_piece')
+    print(p)
     print_board(b)
 
     return b
 
 def unmark_row(b, x):
     for i in range(len(b)):
-        b[x][i] = 0
+        if b[x][i] != 1:
+            b[x][i] = 0
     return b
 
 def unmark_column(b,y):
     for i in range(len(b)):
-        b[i][y] = 0
+        if b[i][y] != 1:
+            b[i][y] = 0
     return b
 
 def unmark_diagonals(b,x,y):
@@ -171,16 +202,20 @@ def unmark_diagonals(b,x,y):
         se_y += 1
 
         if nw_x >= 0 and nw_y >= 0:
-            b[nw_x][nw_y] = 0
+            if b[nw_x][nw_y] != 1:
+               b[nw_x][nw_y] = 0
      
         if ne_x >= 0 and ne_y < len(b):
-            b[ne_x][ne_y] = 0
+            if b[ne_x][ne_y] != 1:
+               b[ne_x][ne_y] = 0
 
         if se_x < len(b) and se_y < len(b):
-            b[se_x][se_y] = 0
+            if b[se_x][se_y] != 1:
+               b[se_x][se_y] = 0
 
         if sw_x < len(b) and sw_y >= 0:
-            b[sw_x][sw_y] = 0
+            if b[sw_x][sw_y] != 1:
+               b[sw_x][sw_y] = 0
   
   
 print(n_queens(4))
