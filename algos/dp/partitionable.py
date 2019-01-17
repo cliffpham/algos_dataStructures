@@ -5,6 +5,12 @@
 # [6,2,4,4] true [6,2] [4,4]
 
 def partitionable(arr):
+    """
+
+    >>> partitionable([1,5,6,3])
+    1
+
+    """
     total = sum(arr)
 
     if total % 2 == 1:
@@ -12,11 +18,14 @@ def partitionable(arr):
 
     target = int(total / 2)
 
-    def recur(arr, target, i, cache):
+    def recur(arr, target, i, cache, depth=0):
         ck = "%s:%s" % (target, i)
+     
         
         if ck in cache:
-            cache[ck]
+            print(cache)
+            print(' ' * depth, target, i, arr[i],cache)
+            return cache[ck]
         
         if target < 0:
             return False
@@ -26,15 +35,16 @@ def partitionable(arr):
 
         if i >= len(arr):
             return 
-
-        l = recur(arr, target, i+1,cache)
-        r = recur(arr, target - arr[i], i+1, cache)
-        cache[ck] = l or r
         
-        return l or r
+        print(' ' * depth, target, i, arr[i],cache)
+
+        l = recur(arr, target, i+1,cache, depth+1) or recur(arr, target - arr[i], i+1, cache, depth+1)
+        cache[ck] = l
+        
+        return l
 
     return recur(arr, target, 0, {})
 
-print(partitionable([1,5,11,5]))
-print(partitionable([1,2,3,5]))
-print(partitionable([6,2,4,4]))
+print(partitionable([1,1,2,1,2,1]))
+# print(partitionable([1,2,3,5]))
+# print(partitionable([6,2,4,4]))
