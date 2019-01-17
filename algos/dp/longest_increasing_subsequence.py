@@ -12,9 +12,11 @@ def rec_lis(arr):
     4
     """
     # set comparison to first index in list
-    last_selected_index = arr[0]
+    # last_selected_index = arr[0]
 
     def rec(arr, last_selected_index, i, cache):
+
+        # last_selected_index is also changing the output otherwise i is only selecting one value at what was registerd at i
         if i in cache:
             return cache[i]
 
@@ -22,18 +24,18 @@ def rec_lis(arr):
             return 0
 
         # minimum distance to itself is 1
-        l = 1 
-        r = 1
+        l = 0 
+        r = 0
 
-        if last_selected_index <= arr[i]:
+        if last_selected_index is None or last_selected_index <= arr[i]:
             r = rec(arr, arr[i], i+1, cache)+1
 
         l = rec(arr, last_selected_index, i+1, cache)
-        cache[i] = max(l,r)
+        # cache[i] = max(l,r)
 
         return max(l,r)
         
-    return rec(arr, last_selected_index,0,{})
+    return rec(arr, None,0,{})
 
 # def rec_lis(seq, cache={}): 
 #     def L(cur): 
