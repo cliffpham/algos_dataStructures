@@ -22,10 +22,10 @@ def solve(b):
 
 def check_vertical(b,y):
     cur = b[y][y]
-    count = 1
+    count = 0
     
     for i in range(len(b)):
-        if b[i][y] == cur:
+        if cur == b[i][y]:
             count += 1
         else:
             count -= 1
@@ -37,10 +37,10 @@ def check_vertical(b,y):
 
 def check_horizontal(b,x):
     cur = b[x][x]
-    count = 1
+    count = 0
     
     for i in range(len(b)):
-        if b[x][i] == cur:
+        if cur == b[x][i]:
             count += 1
         else:
             count -= 1
@@ -87,6 +87,12 @@ board2 = [[2,2,2,2],
           [2,1,2,1],
           [1,2,1,2]]
 
+board3 = [[2,2,2,2],
+          [1,2,1,2],
+          [2,1,2,1],
+          [1,1,1,1]]
+
 
 print(solve(board))
 print(solve(board2))
+print(solve(board3))
