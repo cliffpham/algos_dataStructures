@@ -8,20 +8,20 @@
 
 def n_knights(n):
     b = create_board(n)
-    result = solve(b, n*2, [])
+    result = solve(n, b, n*2, [])
 
     return result
 
-def solve(b, remaining_knights, positions):
+def solve(n, b, remaining_knights, positions):
     if remaining_knights == 0:
-        print(positions)
+        print_board(n, positions)
         return True
     
     open_spaces = search(b)
 
     for candidate in open_spaces:
         if piece_placed(b, candidate, positions):
-            if solve(b, remaining_knights-1, positions):
+            if solve(n, b, remaining_knights-1, positions):
                 return True
             unplace_piece(b, candidate, positions)
 
@@ -89,5 +89,18 @@ def unplace_piece(b, candidate, positions):
     mark_sight(b,x,y,val = -1)
     positions.pop()
     return 
+
+def print_board(n, positions):
+    board = []
+    for i in range(n):
+        board.append(['•' for j in range(n)])
+
+    for x, y in positions:
+        board[x][y] = 'K'
+
+    for row in board:
+        for spot in row:
+            print(spot, end = " ")
+        print()
 
 print(n_knights(5))
