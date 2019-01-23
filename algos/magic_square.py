@@ -8,21 +8,22 @@ def magic_square(b):
     spots = find_mutable_spots(b, immutables)
 
     result = solve(b, spots, nb, immutables, 0)
+    c = compare_boards(b, result, spots)
     
-    return result
+    return c
 
 def solve(b, spots, nb, immutables, i):
     if i == len(spots):
-        print(nb)
+        # print(nb)
         return nb
 
-    for spot in spots:
-        if place_num(nb, spot):
-            if solve(b, spots, nb, immutables, i+1):
-                return True
-            undo_move(nb, spot)
+    spot = spots[i]
 
-    return False
+    if place_num(nb, spot):
+        if solve(b, spots, nb, immutables, i+1):
+            return nb
+        undo_move(nb, spot)
+
 
 def find_mutable_spots(b, immutables):
     q = []
@@ -38,10 +39,13 @@ def place_num(nb, spot):
     x = spot[0]
     y = spot[1]
 
+    if check_row(nb, x, y, nb[x][y]) or check_col(nb, x, y, nb[x][y]):
+        return True
+
     options = [1,2,3,4,5,6,7,8,9]
 
     for option in options:
-        if check_row(nb, x, y, option) and check_col(nb,x, y, option):
+        if check_row(nb, x, y, option) or check_col(nb,x, y, option):
             nb[x][y] = option
             return True
 
@@ -54,7 +58,7 @@ def undo_move(nb, spot):
     nb[x][y] = 0
 
 def check_row(nb, x, y, option):
-    temp = b[x][y]
+    temp = nb[x][y]
     val = 0
     nb[x][y] = option
 
@@ -69,7 +73,7 @@ def check_row(nb, x, y, option):
     return False
 
 def check_col(nb, x, y, option):
-    temp = b[x][y]
+    temp = nb[x][y]
     val = 0
     nb[x][y] = option
 
@@ -131,6 +135,13 @@ def scan_cols(b, immutables):
             immutables.add((i,2)) 
     return
 
+def compare_boards(b, nb, spots):
+    c = []
+    for x,y in spots:
+         c.append(abs(b[x][y] - nb[x][y]))
+    return sum(c)
+        
+
 b = [
     [4,9,2],
     [3,5,7],
@@ -143,6 +154,13 @@ b1 = [
     [6,4,2]
 ]
 
+b2 = [
+    [4,8,2],
+    [4,5,7],
+    [6,1,6]
+]
+
 print(magic_square(b))
 print(magic_square(b1))
+print(magic_square(b2))
 
