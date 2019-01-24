@@ -13,7 +13,8 @@ def find_words(arr):
 def letter_combinations(arr):
     perms = []
     for r in range(len(arr)):
-        perms += [''.join(s) for s in itertools.combinations(arr, r)]
+        perms += [''.join(s) for s in itertools.permutations(arr, r)]
+        
     return perms
 
 def create_dictionary():
@@ -35,3 +36,4 @@ def check_dictionary(arr, dictionary):
     return result
     
 print(find_words(['a','t','o','c','r','y']))
+print(find_words(['a','t','p','c','z']))
