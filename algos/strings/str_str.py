@@ -17,7 +17,19 @@ class test_strStr(unittest.TestCase):
         )
 
 def str_str(haystack,needle):
-    return haystack.find(needle)
+    # return haystack.find(needle)
+
+# other solution
+    if len(haystack)==0 and len(needle)==0:
+        return 0
+
+    for i in range(len(haystack)):
+        if haystack[i:i+len(needle)] == needle:
+            return i
+    else:
+        return -1
 
 if __name__ == "__main__":
     unittest.main()
+
+
