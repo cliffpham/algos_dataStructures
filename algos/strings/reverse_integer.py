@@ -1,6 +1,5 @@
 import unittest
 
-
 class test_reverse_integer(unittest.TestCase):
     def test1_reverse_integer(self):
         self.assertEqual(
@@ -28,7 +27,9 @@ def reverse_integer(n):
         
     while n:
         reverse_num = reverse_num * 10 + (n % 10)
+        print(reverse_num)
         n = n // 10
+        print(n)
                 
     if is_negative:
         reverse_num *= -1
