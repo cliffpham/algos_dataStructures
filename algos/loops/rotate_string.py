@@ -1,14 +1,33 @@
-def rotate_string(s, s2):
-    # l = len(s)
+import unittest
+
+class test_rotate_string(unittest.TestCase):
+    def test1(self):
+        self.assertTrue(
+            rotate_string('abc', 'cab')
+        )
+    def test2(self):
+        self.assertFalse(
+            rotate_string('aa', 'a')
+        )
+
+def rotate_string(A, B):
+    
+    if A == B:
+        return True
+
+    if len(A) != len(B):
+        return False
+
     new_s = ''
-    for i in range(len(s)):
-        i = s
+    for i in range(len(A)):
+        i = A
         new_s += i
    
     for i in range(len(new_s)):
-        if new_s[i:i+len(s2)] == s2:
+        if new_s[i:i+len(B)] == B:
             return True
 
     return False
-print(rotate_string('abcde', 'cdeab'))
-print(rotate_string('abcde', 'abced'))
+
+if __name__ == "__main__":
+    unittest.main()
