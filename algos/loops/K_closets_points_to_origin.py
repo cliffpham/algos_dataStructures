@@ -1,20 +1,10 @@
+# space efficient solution
+
 import math
 
 def closet(points, K):
     output = []
-    # while j < len(points):
-    #     if compare(points, i) < compare(points, j):
-    #         temp = points[i]
-    #         points[i] = points[j]
-    #         points[j] = temp
-    #     i+=1
-    #     j+=1
     points = merge_sort(points)
-    print(points)
-    
-    # for i in range(len(points)):
-    #     cur = points[i]
-    #     print(math.trunc(math.pow(cur[0],2) + math.pow(cur[1], 2)))
 
     while len(output) < K:
         output.append(points.pop())
@@ -25,6 +15,7 @@ def compare(points, index):
     cur = points[index]
     return math.trunc(math.pow(cur[0],2) + math.pow(cur[1], 2))
 
+#descending order merge sort
 def merge_sort(arr):
     left_index = 0
     right_index = 0
@@ -61,9 +52,16 @@ def merge(left, right, left_index, right_index):
 
     return results
 
-print(closet(points = [[-5,4],[-6,-5],[4,6]], K=2))
-print(closet(points = [[3,3],[5,-1],[-2,4]], K=2))
-print(closet(points = [[-2,10],[-4,-8],[10,7],[-4,-7]], K=3))
+# print(closet(points = [[-5,4],[-6,-5],[4,6]], K=2))
+# print(closet(points = [[3,3],[5,-1],[-2,4]], K=2))
+# print(closet(points = [[-2,10],[-4,-8],[10,7],[-4,-7]], K=3))
+
+# time efficient solution
+
+def kClosest(points, K):
+    points.sort(reverse = False, key = lambda p: p[0]**2 + p[1]**2)
+    
+    return points[:K]
 
 
 
