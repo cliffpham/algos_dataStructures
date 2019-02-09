@@ -6,7 +6,7 @@
 # You must use only constant, O(1) extra space.
 # Your runtime complexity should be less than O(n2).
 # There is only one duplicate number in the array, but it could be repeated more than once.
-# import unittest
+import unittest
 
 class test(unittest.TestCase):
     def test1(self):
@@ -16,11 +16,13 @@ class test(unittest.TestCase):
         )
 
 def dup(nums):
-    nums.sort()
+    seen = set()
 
-    for i in range(1,len(nums)):
-        if nums[i] == nums[i-1]:
+    for i in range(len(nums)):
+        if nums[i] in seen:
             return nums[i]
+        else:
+            seen.add(nums[i])
 
 if __name__ == "__main__":
     unittest.main()
