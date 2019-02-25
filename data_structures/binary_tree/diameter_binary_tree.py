@@ -12,3 +12,5 @@ def diameter(node):
     
     l_diameter = diameter(node.left)
     r_diameter = diameter(node.right)
+
+    return max(l_height + r_height, max(l_diameter, r_diameter))
