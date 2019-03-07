@@ -18,11 +18,10 @@ class Test(unittest.TestCase):
         )
 
 def solve(strs):
-    # sort the string so that the string with the shortest length will be used 
+    # find the shortest string in the list
     # to be compared with all other words
-    strs.sort()
     result = ""
-    start = strs[0]
+    start = min(strs, key=len)
 
 
     # compare each letter at a time with every word and if every word shares the letter in common, concate to results
