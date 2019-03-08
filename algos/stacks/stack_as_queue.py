@@ -1,20 +1,51 @@
-class Queue(object):
-    def __init__(self):
-        self.input_stack = []
-        self.output_stack = []
-    
-    def enqueue(self, element):
-        self.input_stack.append(element)
-    
-    def dequeue(self):
-        if not self.output_stack:
-            while self.input_stack:
-                self.output_stack.append(self.input_stack.pop())
-        return self.output_stack.pop()
+class MyQueue(object):
 
-# q = Queue()
-# arr = ['c', 'a', 't']
-# for i in range(3):
-#     q.enqueue(arr[i])
-# for i in range(3):
-#     print(q.dequeue())
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.input = []
+        self.output = []
+
+    def push(self, x):
+        """
+        Push element x to the back of queue.
+        :type x: int
+        :rtype: None
+        """
+        self.input.append(x)
+        
+    def pop(self):
+        """
+        Removes the element from in front of queue and returns that element.
+        :rtype: int
+        """
+
+        if not self.output:
+            while self.input:
+                self.output.append(self.input.pop())
+        
+        return self.output.pop()
+
+    def peek(self):
+        """
+        Get the front element.
+        :rtype: int
+        """
+        
+        if self.output:
+            i = len(self.output)-1
+            return self.output[i]
+        else:
+            return self.input[0]
+
+    def empty(self):
+        """
+        Returns whether the queue is empty.
+        :rtype: bool
+        """
+
+        if len(self.input) > 0 or len(self.output) > 0:
+            return False
+
+        return True
