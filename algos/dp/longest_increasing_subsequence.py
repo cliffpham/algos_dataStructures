@@ -1,41 +1,48 @@
 #incomplete
+import unittest
 
-def rec_lis(arr):
-    """
-    >>> rec_lis([3,1,3,2,4,1,7,8])
-    5
+class Test(unittest.TestCase):
+    def test1(self):
+        self.assertEqual(
+            lis([3,1,3,2,4,1,7,8]),
+            5
+        ),
+    def test2(self):
+        self.assertEqual(
+            lis([3,4,-1,0,6,2,3]),
+            4
+        ),
+    def test3(self):
+        self.assertEqual(
+            lis([2,2]),
+            1
+        )
+def rec(arr, i, last_selected_index, cache):
+    ck = "%s:%s" % (i, last_selected_index)
 
-    >>> rec_lis([3,4,-1,0,6,2,3])
-    4
+    if ck in cache:
+        return cache[ck]
 
-    >>> rec_lis([7,6,3,8,2,10,11,2])
-    4
-    """
-    # set comparison to first index in list
-    # last_selected_index = arr[0]
+    if i >= len(arr):
+        return 0
 
-    def rec(arr, last_selected_index, i, cache):
+    l = rec(arr, i+1, last_selected_index,  cache)
+    
+    r = 0
+    if last_selected_index is None or last_selected_index < arr[i]:
+        r = rec(arr, i+1, arr[i], cache) + 1
 
-        # last_selected_index is also changing the output otherwise i is only selecting one value at what was registerd at i
-        if i in cache:
-            return cache[i]
+    cache[ck] = max(l,r)
+ 
+    return max(l,r)
 
-        if i >= len(arr):
-            return 0
+def lis(arr):
+ 
+    return rec(arr, 0, None, {})
 
-        # minimum distance to itself is 1
-        l = 0 
-        r = 0
+if __name__ == "__main__":
+    unittest.main()
 
-        if last_selected_index is None or last_selected_index <= arr[i]:
-            r = rec(arr, arr[i], i+1, cache)+1
-
-        l = rec(arr, last_selected_index, i+1, cache)
-        # cache[i] = max(l,r)
-
-        return max(l,r)
-        
-    return rec(arr, None,0,{})
 
 # def rec_lis(seq, cache={}): 
 #     def L(cur): 
