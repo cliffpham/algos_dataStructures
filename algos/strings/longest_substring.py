@@ -32,28 +32,26 @@ class Tests(unittest.TestCase):
             2
         )
 
-def longest_substring(s):
-    if len(s) == 0:
-        return 0
+def recur(str, cur_str, i):
+    count = len(cur_str)
 
-    if len(s) == 1:
-        return 1
+    if i >= len(str):
+        return count
 
-    max_s = 0
-    cur_unique_char = [s[0]]
+    if str[i] in cur_str:
+        return count
 
-    for i in range(1, len(s)):
-        if s[i] not in cur_unique_char:
-            cur_unique_char.append(s[i])
-    
-        # if existing char is found: compare max and reset cur values
-        else:
-            max_s = max(max_s, len(cur_unique_char))
-            del cur_unique_char[:]
-            cur_unique_char.append(s[i])
-  
-    max_s = max(max_s, len(cur_unique_char))
-    return max_s
+    return recur(str, cur_str + str[i], i+1)
+
+def longest_substring(str):
+    max_val = 0
+    for i in range(len(str)):
+        cur_char = str[i];
+        cur_str = '' + cur_char
+        res = recur(str, cur_str, i+1)
+        if max_val < res:
+            max_val = res
+    return max_val
 
 if __name__ == "__main__":
     unittest.main()
