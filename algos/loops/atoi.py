@@ -23,29 +23,28 @@ class atoi_test(unittest.TestCase):
         )
     def test5(self):
         self.assertEqual(
-            atoi('""'),
+            atoi(""),
             0
         )
 def atoi(s):
-    pointer = 0
+    pointer = 0;
     is_negative = False
+    solution = 0;
 
-    while pointer < len(s) and s[pointer] == ' ':
+    while pointer < len(s) and ord(s[pointer]) < 33:
         pointer += 1
     
-    if s[pointer] == '-':
-        is_negative = True
-        pointer += 1
-    
-    elif s[pointer] == '+':
-        is_negative = False
-        pointer += 1
-    
-    solution = 0
+    if pointer < len(s):
+        if s[pointer] == '-':
+          is_negative = True
+          pointer += 1 
+        elif s[pointer] == '+':
+          is_negative = False
+          pointer += 1
 
     for pointer in range(pointer, len(s)):
-        if not s[pointer].isdigit():
-            break
+        if not(ord(s[pointer]) >= 48 and ord(s[pointer]) <= 57):
+            return solution
         else:
             solution *= 10
             solution += int(s[pointer])
