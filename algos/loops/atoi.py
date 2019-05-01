@@ -44,7 +44,7 @@ def atoi(s):
 
     for pointer in range(pointer, len(s)):
         if not(ord(s[pointer]) >= 48 and ord(s[pointer]) <= 57):
-            return solution
+            break
         else:
             solution *= 10
             solution += int(s[pointer])
