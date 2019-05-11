@@ -40,7 +40,37 @@ class DoublyLinkedList:
             self.head.prev = new_node
             prev_node.next = new_node
             new_node.prev = prev_node
-
+    
+    def find_node(self, node):
+        found = False
+        start = self.head
+        while start:
+            if start.data == node:
+                found = True
+                break
+            last = start
+            start = start.prev
+        if found:
+            print ("Node of value: " + node + " was found")
+        else:
+            print ("No node with value: " + node + " was found")
+    
+    def delete_node(self, node):
+        found = False
+        start = self.head
+        while start:
+            if start.data == node:
+                left_node = start.next
+                right_node = start.prev
+                left_node.prev = right_node
+                right_node.next = left_node
+            last = start
+            start = start.prev
+        if found:
+            print ("Node was removed")
+        else:
+            print ("Node was not found")
+                
     def traverse_forward(self, node):
         print("Traversal From the Head to the Tail")
         while node:
@@ -60,4 +90,7 @@ linked_list.insert_node('A')
 linked_list.insert_node('B')
 linked_list.insert_node('C')
 linked_list.traverse_forward(linked_list.head)
-linked_list.traverse_backward(linked_list.tail)
+# linked_list.traverse_backward(linked_list.tail)
+linked_list.find_node('B')
+linked_list.delete_node('B')
+linked_list.traverse_forward(linked_list.head)
