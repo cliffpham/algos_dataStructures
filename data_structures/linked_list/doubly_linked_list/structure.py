@@ -64,12 +64,31 @@ class DoublyLinkedList:
                 right_node = start.prev
                 left_node.prev = right_node
                 right_node.next = left_node
+                found = True
+                break
             last = start
             start = start.prev
         if found:
             print ("Node was removed")
         else:
             print ("Node was not found")
+        return start
+
+    def pop_left(self):
+        to_pop = self.head.prev
+        if not to_pop:
+            print ("Linked List is empty")
+        return self.delete_node(to_pop.data)
+
+    def pop_right(self):
+        to_pop = self.tail.next
+        if not to_pop:
+            print("Linked List is empty")
+        return self.delete_node(to_pop.data)
+
+    def push(self, data):
+        self.insert_node(data)
+        print ("Inserted node")
                 
     def traverse_forward(self, node):
         print("Traversal From the Head to the Tail")
@@ -85,12 +104,19 @@ class DoublyLinkedList:
             last = node
             node = node.next
 
-linked_list = DoublyLinkedList()
-linked_list.insert_node('A')
-linked_list.insert_node('B')
-linked_list.insert_node('C')
-linked_list.traverse_forward(linked_list.head)
-# linked_list.traverse_backward(linked_list.tail)
-linked_list.find_node('B')
-linked_list.delete_node('B')
-linked_list.traverse_forward(linked_list.head)
+#linked_list = DoublyLinkedList()
+#linked_list.insert_node('A')
+#linked_list.insert_node('B')
+#linked_list.insert_node('C')
+#linked_list.insert_node('D')
+#linked_list.insert_node('E')
+#linked_list.insert_node('F')
+#linked_list.traverse_forward(linked_list.head)
+## linked_list.traverse_backward(linked_list.tail)
+#linked_list.find_node('B')
+#linked_list.delete_node('D')
+#linked_list.pop_left()
+#linked_list.traverse_forward(linked_list.head)
+#linked_list.push('G')
+#linked_list.pop_right()
+#linked_list.traverse_forward(linked_list.head)
