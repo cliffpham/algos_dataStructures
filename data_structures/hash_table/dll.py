@@ -1,19 +1,22 @@
 class Node:
-    def __init__(self, data):
+    def __init__(self, title, data):
+        self.title = title
         self.data = data
-        self.next = data
-        self.prev = data
+        self.next = None
+        self.prev = None
 
 class Head:
     def __init__(self):
         self.next = None
         self.prev = None
+        self.title = None
         self.data = "Head"
 
 class Tail:
     def __init__(self):
         self.next = None
         self.prev = None
+        self.title = None
         self.data = "Tail"
 
 class DoublyLinkedList:
@@ -21,19 +24,19 @@ class DoublyLinkedList:
         self.head = Head()
         self.tail = Tail()
 
-    def insert_initial_node(self, data):
-        new_node = Node(data)
+    def insert_initial_node(self, title, data):
+        new_node = Node(title, data)
 
         new_node.next = self.head
         self.head.prev = new_node
         new_node.prev = self.tail
         self.tail.next = new_node
 
-    def insert_node(self, data):
+    def insert_node(self, title, data):
         if not self.head.prev:
-            self.insert_initial_node(data)
+            self.insert_initial_node(title, data)
         else:
-            new_node = Node(data)
+            new_node = Node(title, data)
             prev_node = self.head.prev
 
             new_node.next = self.head
@@ -45,21 +48,22 @@ class DoublyLinkedList:
         found = False
         start = self.head
         while start:
-            if start.data == node:
+            if start.title == node:
                 found = True
                 break
             last = start
             start = start.prev
         if found:
-            print ("Node of value: " + node + " was found")
-        else:
-            print ("No node with value: " + node + " was found")
+            return True
+           # print ("Node of value: " + node + " was found")
+        return False
+           # print ("No node with value: " + node + " was found")
     
-    def delete_node(self, node):
+    def remove_node(self, node):
         found = False
         start = self.head
         while start:
-            if start.data == node:
+            if start.title == node:
                 left_node = start.next
                 right_node = start.prev
                 left_node.prev = right_node
@@ -69,7 +73,8 @@ class DoublyLinkedList:
             last = start
             start = start.prev
         if found:
-            print ("Node was removed")
+            return start
+           # print ("Node was removed")
         else:
             print ("Node was not found")
         return start
@@ -78,13 +83,13 @@ class DoublyLinkedList:
         to_pop = self.head.prev
         if not to_pop:
             print ("Linked List is empty")
-        return self.delete_node(to_pop.data)
+        return self.remove_node(to_pop.data)
 
     def pop_right(self):
         to_pop = self.tail.next
         if not to_pop:
             print("Linked List is empty")
-        return self.delete_node(to_pop.data)
+        return self.remove_node(to_pop.data)
 
     def push(self, data):
         self.insert_node(data)
@@ -93,7 +98,7 @@ class DoublyLinkedList:
     def traverse_forward(self, node):
         print("Traversal From the Head to the Tail")
         while node:
-            print(" %s" %(node.data))
+            print(" %s: %s" %(node.title, node.data))
             last = node
             node = node.prev
 
