@@ -95,15 +95,17 @@ class DoublyLinkedList:
         self.insert_node(data)
         print ("Inserted node")
                 
-    def traverse_forward(self, node):
+    def traverse_forward(self):
         print("Traversal From the Head to the Tail")
+        node = self.head
         while node:
             print(" %s: %s" %(node.title, node.data))
             last = node
             node = node.prev
 
-    def traverse_backward(self, node):
+    def traverse_backward(self):
         print("Traversal From the Tail to the Head")
+        node = self.tail
         while node:
             print(" %s" %(node.data))
             last = node
