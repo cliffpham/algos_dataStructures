@@ -41,7 +41,7 @@ def solve(text, pattern):
         if bad_char != -1:
             next_position = find_match(text, pattern, bad_char)
             if next_position == -1:
-                pointer += len(pattern)
+                pointer += 1
             else:
                 pointer += next_position
         else:
