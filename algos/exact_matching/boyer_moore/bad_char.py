@@ -46,6 +46,5 @@ def solve(text, pattern):
                 pointer += next_position
         else:
             result.append(pointer)
-            pointer = pointer + (len(pattern) - 1)
-            
+            pointer = pointer + (len(pattern) - 1) 
     return result
