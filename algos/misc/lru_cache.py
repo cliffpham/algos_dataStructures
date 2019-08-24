@@ -50,6 +50,7 @@ class LRU:
         if key in self.dict:
             n = self.dict[key]
             self.list.remove(n)
+            del self.dict[key]
 
         n = Node(key, val)
         self.list.add(n)
@@ -58,6 +59,6 @@ class LRU:
         if len(self.dict) > self.n:
             to_remove = get_least_used()
             self.list.remove(to_remove)
-            del self.dict[to_remove.key])
+            del self.dict[to_remove.key]
 
 
